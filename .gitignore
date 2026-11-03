@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*credentials*.json
+*.key
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!example.tfvars
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+profiles.yml
+
+# Notebooks and data
+.ipynb_checkpoints/
+analysis/data/
+*.parquet
+*.csv
+!forecasts/ledger/*.csv
+
+# System
+.DS_Store
+*.swp
+*.log
