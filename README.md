@@ -5,7 +5,7 @@ concurrent players and reviews on Steam, metadata from IGDB. Built to answer que
 game developer actually has (what do launches like mine look like, what early signals matter)
 and to publish forecasts that are scored later against reality.
 
-Status: planning. Started 2026-11-03.
+Status: planning. Started 2026-11-03. Open design questions and their proposals: `docs/open-decisions.md`.
 
 ## Goals
 
@@ -19,9 +19,9 @@ Status: planning. Started 2026-11-03.
 
 | Source | Endpoint | Cadence | Notes |
 |---|---|---|---|
-| Twitch Helix | `GET /streams`, `GET /games/top` | 5-15 min | app credentials; uses IGDB ids |
-| Kick public API | `GET /livestreams` | 5-15 min | app token (60 days); no stream id, key is (channel, started_at) |
-| Steam Web API | `GetNumberOfCurrentPlayers`, `/appreviews/{appid}?json=1`, appdetails | 15 min / daily | review endpoint needs no key |
+| Twitch Helix | `GET /streams` | 15 min | app credentials; uses IGDB ids |
+| Kick public API | `GET /livestreams` | 15 min | app token (60 days); no stream id, key is (channel, started_at) |
+| Steam Web API | `GetMostPlayedGames`, `GetNumberOfCurrentPlayers`, `/appreviews/{appid}?json=1`, `GetAppList`, appdetails | 30 min / hourly / daily | `GetAppList` needs a key; reviews, players and appdetails do not |
 | IGDB | games, external_games | daily | bridge table for categories across platforms |
 
 YouTube Gaming is out of scope for v1 (quota and inconsistent per-game classification).
