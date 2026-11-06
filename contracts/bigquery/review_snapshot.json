@@ -1,0 +1,87 @@
+[
+  {
+    "name": "schema_version",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "source",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "steam (live query_summary) | steam_backfill (reconstructed from per-review timestamps)"
+  },
+  {
+    "name": "snapshot_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "Instant the counts refer to, UTC. Live: start of the hourly bucket. Backfill: end of the UTC day."
+  },
+  {
+    "name": "observed_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "Time the counts were computed or received, UTC"
+  },
+  {
+    "name": "run_id",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "appid",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "total_reviews",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "All reviews, all languages, all purchase types"
+  },
+  {
+    "name": "total_positive",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "total_negative",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "review_score",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Steam review_score 0-9; null for backfill rows"
+  },
+  {
+    "name": "review_score_desc",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Steam label, e.g. Very Positive; null for backfill rows"
+  },
+  {
+    "name": "subscription_name",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Pub/Sub metadata"
+  },
+  {
+    "name": "message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Pub/Sub metadata"
+  },
+  {
+    "name": "publish_time",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "Pub/Sub metadata"
+  },
+  {
+    "name": "attributes",
+    "type": "JSON",
+    "mode": "NULLABLE",
+    "description": "Pub/Sub metadata"
+  }
+]

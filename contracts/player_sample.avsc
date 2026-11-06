@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "player_sample",
+  "namespace": "game_signals.v1",
+  "doc": "Concurrent players of one Steam app at one sampling tick. Dedupe key: (appid, sampled_at).",
+  "fields": [
+    {"name": "schema_version", "type": "int", "default": 1},
+    {"name": "source", "type": "string", "doc": "Always steam in v1"},
+    {"name": "sample_tier", "type": "string", "doc": "top (GetMostPlayedGames) | watchlist (GetNumberOfCurrentPlayers)"},
+    {"name": "sampled_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Start of the 30-minute bucket, UTC"},
+    {"name": "observed_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Time the API response was received, UTC"},
+    {"name": "run_id", "type": "string"},
+    {"name": "appid", "type": "long", "doc": "Steam app id"},
+    {"name": "player_count", "type": "long", "doc": "Concurrent players at sampling time"},
+    {"name": "rank", "type": ["null", "long"], "default": null, "doc": "Position in GetMostPlayedGames, top tier only"},
+    {"name": "peak_in_game", "type": ["null", "long"], "default": null, "doc": "Daily peak reported by GetMostPlayedGames, top tier only"}
+  ]
+}

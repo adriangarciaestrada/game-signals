@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "review_snapshot",
+  "namespace": "game_signals.v1",
+  "doc": "Cumulative review counts of one Steam app at one instant. Dedupe key: (appid, snapshot_at, source).",
+  "fields": [
+    {"name": "schema_version", "type": "int", "default": 1},
+    {"name": "source", "type": "string", "doc": "steam (live query_summary) | steam_backfill (reconstructed from per-review timestamps)"},
+    {"name": "snapshot_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Instant the counts refer to, UTC. Live: start of the hourly bucket. Backfill: end of the UTC day."},
+    {"name": "observed_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Time the counts were computed or received, UTC"},
+    {"name": "run_id", "type": "string"},
+    {"name": "appid", "type": "long"},
+    {"name": "total_reviews", "type": "long", "doc": "All reviews, all languages, all purchase types"},
+    {"name": "total_positive", "type": "long"},
+    {"name": "total_negative", "type": "long"},
+    {"name": "review_score", "type": ["null", "long"], "default": null, "doc": "Steam review_score 0-9; null for backfill rows"},
+    {"name": "review_score_desc", "type": ["null", "string"], "default": null, "doc": "Steam label, e.g. Very Positive; null for backfill rows"}
+  ]
+}

@@ -29,12 +29,13 @@ YouTube Gaming is out of scope for v1 (quota and inconsistent per-game classific
 ## Layout
 
 ```
-ingestion/   Python adapters, one per source, emitting a common "audience sample" schema to Pub/Sub
+contracts/   Avro schemas (source of truth) and derived BigQuery table schemas for the three event types
+ingestion/   Python adapters, one per source, publishing contract events to Pub/Sub
 dbt/         staging -> intermediate -> marts; incremental, partitioned by date, clustered by game
 terraform/   project, Pub/Sub topics and BigQuery subscriptions, datasets, Cloud Run jobs, Scheduler, budget alert
 analysis/    notebooks and notes; each note follows the five-part structure above
 forecasts/   weekly ledger (pre-registered targets, metrics and windows) and scoring code
-docs/        decisions (ADRs), data contracts, cost log
+docs/        decisions (ADRs), open decisions, data contract
 ```
 
 ## Phases

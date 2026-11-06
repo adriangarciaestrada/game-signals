@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "audience_sample",
+  "namespace": "game_signals.v1",
+  "doc": "One live stream observed at one sampling tick on Twitch or Kick. Dedupe key: (source, channel_id, sampled_at).",
+  "fields": [
+    {"name": "schema_version", "type": "int", "default": 1, "doc": "Contract version. Bump on any breaking change."},
+    {"name": "source", "type": "string", "doc": "Platform: twitch | kick"},
+    {"name": "sample_tier", "type": "string", "doc": "How the stream entered the sample: top (viewer floor applies) | watchlist (no floor)"},
+    {"name": "sampled_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Start of the 15-minute bucket, UTC"},
+    {"name": "observed_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Time the API response was received, UTC"},
+    {"name": "run_id", "type": "string", "doc": "Cloud Run execution name, or local-<timestamp> for local runs"},
+    {"name": "platform_game_id", "type": "string", "doc": "Game id in the platform's own id space (Twitch game_id, Kick category id)"},
+    {"name": "platform_game_name", "type": ["null", "string"], "default": null, "doc": "Game name as reported by the platform at sampling time"},
+    {"name": "channel_id", "type": "string", "doc": "Stable channel id (Twitch user_id, Kick broadcaster_user_id)"},
+    {"name": "channel_login", "type": "string", "doc": "Channel login or slug at sampling time"},
+    {"name": "stream_id", "type": ["null", "string"], "default": null, "doc": "Platform stream id; Twitch only, Kick has none"},
+    {"name": "stream_started_at", "type": {"type": "long", "logicalType": "timestamp-micros"}, "doc": "Stream start time reported by the platform, UTC"},
+    {"name": "viewer_count", "type": "long", "doc": "Concurrent viewers at sampling time"},
+    {"name": "language", "type": ["null", "string"], "default": null, "doc": "Stream language code as reported by the platform"}
+  ]
+}
